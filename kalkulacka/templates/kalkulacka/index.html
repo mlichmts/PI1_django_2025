@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'kalkulacka/kalkulacka.css' %}">
     <title>kalkulačka</title>
 </head>
 <body>
@@ -10,18 +12,21 @@
 
     <form method="post">
         {% csrf_token %}
-        <input type="text" name="a">
+        <div class=" cele">
+        <input type="text" name="a" class="prve" placeholder= "TU zadaj prvé číslo">
             <select name="operator">
                 <option value="+">+</option>
                 <option value="-">-</option>
                 <option value="*">*</option>
                 <option value="/">/</option>
             </select>
-        <input type="text" name="b">
-        <input type="submit">
-
+        <input type="text" name="b" class="druhe" placeholder= "TU zadaj druhé číslo">
+        <input type="submit" id = "submit" value = "VYPOČÍTAJ">
+    </div>
 
     </form>
-    <h2>{{vysledok}}</h2>
+    
+    <h2>vysledok: {{vysledok}}</h2>
+    <img src={% static 'kalkulacka/calc.png' %}>
 </body>
 </html>

@@ -52,3 +52,29 @@ from . import views
 urlpatterns = [ 
     path('', views.index, name='index' ),
 ]
+
+9.TEMPLATE
+
+9.1 
+-Vytvorit v priecinku aplikacie preičinok templates/názov_aplikácie
+- v tomto priecinku vytvorit html subor(napr. index.html)
+9.2 upraviť views tak aby používal template
+
+from django.shortcuts import render
+
+def index(request):
+    sucet = 10+5
+    apar="cislo a je parne"
+    return render(request, 'kalkulacka/index.html',{"sucet":sucet,"apar":apar})
+
+
+
+10.css, obrázky
+-Vytvorit v priecinku aplikacie preičinok static/názov_aplikácie
+-v tomto priecinku vytvorit css(naprikal kalkulacka.css)
+-do tohto pirecinku nakopirovat obrazky
+-do template(index.html) doplnit:
+    -uplne na zaciatok doplnit{% load static %}
+    -do hlavicky odkaz na style
+    <head>
+    <link rel= "stylesheet" href="{% static 'kalkulacka/kalkulacka.css' %}">

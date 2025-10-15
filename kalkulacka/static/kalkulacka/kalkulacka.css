@@ -1,0 +1,39 @@
+html{
+    font-family: sans-serif;
+}
+h1{
+    color: sandybrown;
+    font-size: 64px;
+    text-align: center;
+    text-decoration:underline;
+}
+.prve{
+    border: 2px black dashed;
+    width: 500px;
+    text-align: center;
+    margin: 15px;
+}
+.druhe{
+    border: 2px black dashed;
+    width: 500px;
+    margin: 15px;
+    text-align: center;
+    
+}
+#submit{
+    border: none;
+    background-color: aqua;
+    border-radius: 8px;
+    padding: 5px 5px;
+    font-weight: 500;
+    font-size: 20px;
+    width: fit-content;
+}
+.cele{
+    display:flex ;
+    flex-direction: column;
+    align-items: center;
+}
+h2{
+    text-align: center;
+}
