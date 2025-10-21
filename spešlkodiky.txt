@@ -1,0 +1,28 @@
+prvocislo:
+ if a <= 1:
+            prvocislo = False
+        else:
+            prvocislo = True
+            for i in range(2, a):
+                if a % i == 0:
+                    prvocislo = False
+                    break
+
+        if prvocislo:
+            vysledok_prvocislo = "cislo a je prvočíslo"
+        else:
+            vysledok_prvocislo = "cislo a nie je prvočíslo"
+
+parita:
+ if a%2 == 0:
+            apar = "cislo A je parne"
+
+        else:
+            apar = "cislo A je neparne"
+
+nacitavanie:
+if request.method == "GET":
+            vysledok = 0
+    if request.method == "POST":
+        a = int((request.POST["cislo1"]))
+        b = int((request.POST["cislo2"]))
