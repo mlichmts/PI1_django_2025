@@ -149,3 +149,38 @@ def index(request):
             vysledok_prvocislob = "cislo b nie je prvočíslo"
 
     return render(request, 'cisla/index.html', {"vysledok": vysledok,"apar": apar,"bpar": bpar,"vysledok_prvocislo":vysledok_prvocislo,"vysledok_prvocislob":vysledok_prvocislob})
+
+
+
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <link rel= "stylesheet" href="{% static 'cisla/cisla.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="cislo1">A</label>
+        <input type="number" name="cislo1" id="cislo1">
+        <label for="cislo2">B</label>
+        <input type="number" name="cislo2" id="cislo2">
+        <input type="submit" id="submit" value="OK">
+
+    </form>
+
+    <h2>vysledok: {{vysledok}}</h2>
+    <h2>vysledok: {{apar}}</h2>
+    <h2>vysledok: {{bpar}}</h2>
+
+    <h2>vysledok: {{vysledok_prvocislo}}</h2>
+    <h2>vysledok: {{vysledok_prvocislob}}</h2>
+</body>
+</html>
