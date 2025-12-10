@@ -14,8 +14,8 @@ def index(request):
     if request.method == "GET":
             vysledok = 0
     if request.method == "POST":
-        a = int((request.POST["cislo1"]))
-        b = int((request.POST["cislo2"]))
+        a = int(request.POST["cislo1"])
+        b = int(request.POST["cislo2"])
         
         if a>b:
              vysledok="cislo a je vacsie"
@@ -24,7 +24,6 @@ def index(request):
         else:
              vysledok ="cisla su rovnake"              
     
-             
         if a%2 == 0:
             apar = "cislo A je parne"
 
@@ -50,7 +49,6 @@ def index(request):
             vysledok_prvocislo = "cislo a je prvočíslo"
         else:
             vysledok_prvocislo = "cislo a nie je prvočíslo"
-
 
         if b <= 1:
             prvocislob = False

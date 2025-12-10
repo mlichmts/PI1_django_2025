@@ -79,108 +79,37 @@ def index(request):
     <head>
     <link rel= "stylesheet" href="{% static 'kalkulacka/kalkulacka.css' %}">
 
+11. Modely(models.py)
 
-from django.shortcuts import render
-a=0
-b=0
-
-
-def index(request):
-
-    apar = ""
-    bpar = ""
-    vysledok_prvocislo=""
-    vysledok_prvocislob=""
+from django.db import models
 
 
-    if request.method == "GET":
-            vysledok = 0
-    if request.method == "POST":
-        a = int((request.POST["cislo1"]))
-        b = int((request.POST["cislo2"]))
-        
-        if a>b:
-             vysledok="cislo a je vacsie"
-        elif b>a:
-             vysledok ="cislo b je vacsie"  
-        else:
-             vysledok ="cisla su rovnake"              
-    
-             
-        if a%2 == 0:
-            apar = "cislo A je parne"
+class Osoba(models.Model):
+    meno = models.CharField(max_length=100)
+    priezvisko = models.CharField(max_length=100)
+    vek = models.IntegerField()
+    datum = models.DateField()
+    email = models.EmailField()
+    muz = models.BooleanField()
 
-        else:
-            apar = "cislo A je neparne"
-             
-        if b%2 == 0:
-            bpar = "cislo B je parne"
+    def __str__(self):
+        return f"{self.meno} {self.priezvisko}"    
 
-        else:
-            bpar = "cislo B je neparne"
-         
-        if a <= 1:
-            prvocislo = False
-        else:
-            prvocislo = True
-            for i in range(2, a):
-                if a % i == 0:
-                    prvocislo = False
-                    break
+12. vytvorenie struktury databazy podla modelov:
+python manage.py makemigrations
+py manage.py migrate
 
-        if prvocislo:
-            vysledok_prvocislo = "cislo a je prvočíslo"
-        else:
-            vysledok_prvocislo = "cislo a nie je prvočíslo"
+databaza sa defaultne vytvara v subore db.sqlite3
+
+13. vytvorenie prveho uzivatela do admin rozhrania
+py manage.py createsuperuser
 
 
-        if b <= 1:
-            prvocislob = False
-        else:
-            prvocislob = True
-            for i in range(2, b):
-                if b % i == 0:
-                    prvocislob = False
-                    break
+14. zahrnutie modelov do admin panela(admin.py)
 
-        if prvocislob:
-            vysledok_prvocislob = "cislo b je prvočíslo"
-        else:
-            vysledok_prvocislob = "cislo b nie je prvočíslo"
+from django.contrib import admin
+from.models import Osoba
 
-    return render(request, 'cisla/index.html', {"vysledok": vysledok,"apar": apar,"bpar": bpar,"vysledok_prvocislo":vysledok_prvocislo,"vysledok_prvocislob":vysledok_prvocislob})
+admin.site.register(Osoba)
 
 
-
-
-
-
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="">
-    <link rel= "stylesheet" href="{% static 'cisla/cisla.css' %}">
-    <title>Document</title>
-</head>
-<body>
-    <form method="post">
-        {% csrf_token %}
-        <label for="cislo1">A</label>
-        <input type="number" name="cislo1" id="cislo1">
-        <label for="cislo2">B</label>
-        <input type="number" name="cislo2" id="cislo2">
-        <input type="submit" id="submit" value="OK">
-
-    </form>
-
-    <h2>vysledok: {{vysledok}}</h2>
-    <h2>vysledok: {{apar}}</h2>
-    <h2>vysledok: {{bpar}}</h2>
-
-    <h2>vysledok: {{vysledok_prvocislo}}</h2>
-    <h2>vysledok: {{vysledok_prvocislob}}</h2>
-</body>
-</html>
