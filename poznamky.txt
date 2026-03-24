@@ -113,3 +113,59 @@ from.models import Osoba
 admin.site.register(Osoba)
 
 
+class Kruzok(models.Model):
+    nazov = models.CharField(max_length=100)
+    den = models.CharField(max_length=20)
+    miestnost = models.CharField(max_length=50)
+    # Prepojenie na model Veduci (1 vedúci môže mať viac krúžkov)
+    veduci = models.ForeignKey(Veduci, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.nazov} ({self.den})"
+
+
+order = {
+        "Pondelok": 1,
+        "Utorok": 2,
+        "Streda": 3,
+        "Štvrtok": 4,
+        "Piatok": 5,
+        "Sobota": 6,
+        "Nedeľa": 7,
+    }
+
+    kruzky = sorted(
+        Kruzok.objects.all(),
+        key=lambda k: order.get(k.den, 99)
+    )
+
+
+
+
+
+ <table>
+        <thead>
+            <tr>
+                <th>Názov krúžku</th>
+                <th>Deň</th>
+                <th>Miestnosť</th>
+                <th>Meno vedúceho</th>
+                <th>E-mail vedúceho</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for kruzok in kruzky %}
+            <tr>
+                <td>{{ kruzok.nazov }}</td>
+                <td>{{ kruzok.den }}</td>
+                <td>{{ kruzok.miestnost }}</td>
+                <td>{{ kruzok.veduci.meno }}</td>
+                <td>{{ kruzok.veduci.email }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Žiadne krúžky nie sú dostupné.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
