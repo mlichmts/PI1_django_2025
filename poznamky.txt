@@ -169,3 +169,37 @@ order = {
             {% endfor %}
         </tbody>
     </table>
+
+
+
+
+from django.contrib import admin
+from.models import Veduci, Kruzok
+
+
+
+admin.site.register(Veduci)
+admin.site.register(Kruzok) 
+
+
+
+forms.py(file)
+from django import forms
+from .models import Kruzok
+
+class KruzokForm(forms.ModelForm):
+    class Meta:
+        model = Kruzok
+        fields = ['nazov', 'den', 'miestnost', 'veduci']
+
+
+
+html
+<body>
+    <h1>Pridaj krúžok</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Pridaj</button>
+    </form>
+</body>
